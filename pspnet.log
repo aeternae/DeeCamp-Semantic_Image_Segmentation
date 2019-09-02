@@ -1,0 +1,448 @@
+Number of GPUs: 2
+Namespace(aux=True, aux_weight=0.5, backbone='resnet101', base_size=512, batch_size=16, checkname='res101', crop_size=512, ctx=[gpu(0), gpu(1)], dataset='satellite', dtype='float32', epochs=50, eval=False, kvstore='device', lr=0.01, model='pspnet', momentum=0.9, ngpus=2, no_cuda=False, no_val=False, no_wd=False, norm_kwargs={'num_devices': 2}, norm_layer=<class 'mxnet.gluon.contrib.nn.basic_layers.SyncBatchNorm'>, resume=None, start_epoch=0, syncbn=True, test_batch_size=16, train_split='train', weight_decay=0.0001, workers=20)
+self.crop_size 512
+PSPNet(
+  (head): _PSPHead(
+    (block): HybridSequential(
+      (0): Conv2D(4096 -> 512, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (1): SyncBatchNorm(use_global_stats=False, key='pspnet0__psphead0_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (2): Activation(relu)
+      (3): Dropout(p = 0.1, axes=())
+      (4): Conv2D(512 -> 2, kernel_size=(1, 1), stride=(1, 1))
+    )
+    (psp): _PyramidPooling(
+      (conv1): HybridSequential(
+        (0): Conv2D(2048 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0__pyramidpooling0_hybridsequential0_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+        (2): Activation(relu)
+      )
+      (conv2): HybridSequential(
+        (0): Conv2D(2048 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0__pyramidpooling0_hybridsequential1_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+        (2): Activation(relu)
+      )
+      (conv4): HybridSequential(
+        (0): Conv2D(2048 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0__pyramidpooling0_hybridsequential3_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+        (2): Activation(relu)
+      )
+      (conv3): HybridSequential(
+        (0): Conv2D(2048 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0__pyramidpooling0_hybridsequential2_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+        (2): Activation(relu)
+      )
+    )
+  )
+  (layer3): HybridSequential(
+    (0): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm1_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(512 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (downsample): HybridSequential(
+        (0): Conv2D(512 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_down3_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      )
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm2_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (1): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm4_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm3_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm5_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (2): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm7_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm6_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm8_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (3): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm10_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm9_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm11_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (4): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm13_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm12_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm14_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (5): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm16_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm15_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm17_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (6): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm19_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm18_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm20_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (7): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm22_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm21_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm23_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (8): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm25_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm24_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm26_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (9): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm28_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm27_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm29_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (10): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm31_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm30_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm32_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (11): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm34_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm33_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm35_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (12): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm37_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm36_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm38_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (13): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm40_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm39_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm41_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (14): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm43_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm42_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm44_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (15): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm46_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm45_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm47_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (16): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm49_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm48_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm50_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (17): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm52_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm51_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm53_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (18): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm55_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm54_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm56_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (19): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm58_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm57_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm59_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (20): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm61_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm60_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm62_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (21): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm64_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm63_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm65_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+    (22): BottleneckV1b(
+      (conv2): Conv2D(256 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm67_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm66_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (conv1): Conv2D(1024 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(256 -> 1024, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers3_syncbatchnorm68_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=1024)
+      (relu1): Activation(relu)
+    )
+  )
+  (auxlayer): _FCNHead(
+    (block): HybridSequential(
+      (0): Conv2D(1024 -> 256, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (1): SyncBatchNorm(use_global_stats=False, key='pspnet0__fcnhead0_hybridsequential0_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (2): Activation(relu)
+      (3): Dropout(p = 0.1, axes=())
+      (4): Conv2D(256 -> 2, kernel_size=(1, 1), stride=(1, 1))
+    )
+  )
+  (layer4): HybridSequential(
+    (0): BottleneckV1b(
+      (conv2): Conv2D(512 -> 512, kernel_size=(3, 3), stride=(1, 1), padding=(2, 2), dilation=(2, 2), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm1_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (conv1): Conv2D(1024 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (downsample): HybridSequential(
+        (0): Conv2D(1024 -> 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_down4_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=2048)
+      )
+      (conv3): Conv2D(512 -> 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm2_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=2048)
+      (relu1): Activation(relu)
+    )
+    (1): BottleneckV1b(
+      (conv2): Conv2D(512 -> 512, kernel_size=(3, 3), stride=(1, 1), padding=(4, 4), dilation=(4, 4), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm4_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm3_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (conv1): Conv2D(2048 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(512 -> 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm5_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=2048)
+      (relu1): Activation(relu)
+    )
+    (2): BottleneckV1b(
+      (conv2): Conv2D(512 -> 512, kernel_size=(3, 3), stride=(1, 1), padding=(4, 4), dilation=(4, 4), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm7_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm6_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (conv1): Conv2D(2048 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(512 -> 2048, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers4_syncbatchnorm8_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=2048)
+      (relu1): Activation(relu)
+    )
+  )
+  (maxpool): MaxPool2D(size=(3, 3), stride=(2, 2), padding=(1, 1), ceil_mode=False)
+  (relu): Activation(relu)
+  (layer1): HybridSequential(
+    (0): BottleneckV1b(
+      (conv2): Conv2D(64 -> 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm1_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+      (conv1): Conv2D(128 -> 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (downsample): HybridSequential(
+        (0): Conv2D(128 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_down1_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      )
+      (conv3): Conv2D(64 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm2_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (relu1): Activation(relu)
+    )
+    (1): BottleneckV1b(
+      (conv2): Conv2D(64 -> 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm4_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm3_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+      (conv1): Conv2D(256 -> 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(64 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm5_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (relu1): Activation(relu)
+    )
+    (2): BottleneckV1b(
+      (conv2): Conv2D(64 -> 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm7_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm6_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+      (conv1): Conv2D(256 -> 64, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(64 -> 256, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers1_syncbatchnorm8_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=256)
+      (relu1): Activation(relu)
+    )
+  )
+  (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_syncbatchnorm2_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+  (conv1): HybridSequential(
+    (0): Conv2D(3 -> 64, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+    (1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+    (2): Activation(relu)
+    (3): Conv2D(64 -> 64, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+    (4): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_syncbatchnorm1_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=64)
+    (5): Activation(relu)
+    (6): Conv2D(64 -> 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+  )
+  (layer2): HybridSequential(
+    (0): BottleneckV1b(
+      (conv2): Conv2D(128 -> 128, kernel_size=(3, 3), stride=(2, 2), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm1_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (conv1): Conv2D(256 -> 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (downsample): HybridSequential(
+        (0): Conv2D(256 -> 512, kernel_size=(1, 1), stride=(2, 2), bias=False)
+        (1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_down2_syncbatchnorm0_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      )
+      (conv3): Conv2D(128 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm2_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (relu1): Activation(relu)
+    )
+    (1): BottleneckV1b(
+      (conv2): Conv2D(128 -> 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm4_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm3_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (conv1): Conv2D(512 -> 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(128 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm5_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (relu1): Activation(relu)
+    )
+    (2): BottleneckV1b(
+      (conv2): Conv2D(128 -> 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm7_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm6_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (conv1): Conv2D(512 -> 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(128 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm8_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (relu1): Activation(relu)
+    )
+    (3): BottleneckV1b(
+      (conv2): Conv2D(128 -> 128, kernel_size=(3, 3), stride=(1, 1), padding=(1, 1), bias=False)
+      (relu3): Activation(relu)
+      (bn2): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm10_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (bn1): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm9_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=128)
+      (conv1): Conv2D(512 -> 128, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (conv3): Conv2D(128 -> 512, kernel_size=(1, 1), stride=(1, 1), bias=False)
+      (relu2): Activation(relu)
+      (bn3): SyncBatchNorm(use_global_stats=False, key='pspnet0_resnetv1s_layers2_syncbatchnorm11_', ndev=2, eps=1e-05, fix_gamma=False, momentum=0.9, in_channels=512)
+      (relu1): Activation(relu)
+    )
+  )
+)  0%|          | 0/815 [00:00<?, ?it/s][07:25:11] src/operator/nn/./cudnn/./cudnn_algoreg-inl.h:97: Running performance tests to find the best convolution algorithm, this can take a while... (setting env variable MXNET_CUDNN_AUTOTUNE_DEFAULT to 0 to disable)
+[07:25:21] src/kvstore/././comm.h:744: only 0 out of 2 GPU pairs are enabled direct access. It may affect the performance. You can set MXNET_ENABLE_GPU_P2P=0 to turn it off
+[07:25:21] src/kvstore/././comm.h:753: ..
+[07:25:21] src/kvstore/././comm.h:753: ..
+Epoch 0, training loss 1.143:   0%|          | 0/815 [00:11<?, ?it/s]Epoch 0, training loss 1.143:   0%|          | 1/815 [00:11<2:40:17, 11.82s/it]Epoch 0, training loss 1.089:   0%|          | 1/815 [00:14<2:40:17, 11.82s/it]Epoch 0, training loss 1.089:   0%|          | 2/815 [00:15<2:08:33,  9.49s/it]Epoch 0, training loss 1.047:   0%|          | 2/815 [00:16<2:08:33,  9.49s/it]Epoch 0, training loss 1.047:   0%|          | 3/815 [00:18<1:38:46,  7.30s/it]Epoch 0, training loss 1.016:   0%|          | 3/815 [00:18<1:38:46,  7.30s/it]Epoch 0, training loss 1.016:   0%|          | 4/815 [00:20<1:17:33,  5.74s/it]Epoch 0, training loss 0.979:   0%|          | 4/815 [00:21<1:17:33,  5.74s/it]Epoch 0, training loss 0.979:   1%|          | 5/815 [00:22<1:03:14,  4.69s/it]Epoch 0, training loss 0.951:   1%|          | 5/815 [00:23<1:03:14,  4.69s/it]Epoch 0, training loss 0.951:   1%|          | 6/815 [00:24<52:33,  3.90s/it]  Epoch 0, training loss 0.917:   1%|          | 6/815 [00:25<52:33,  3.90s/it]Epoch 0, training loss 0.917:   1%|          | 7/815 [00:26<45:36,  3.39s/it]Epoch 0, training loss 0.898:   1%|          | 7/815 [00:27<45:36,  3.39s/it]Epoch 0, training loss 0.898:   1%|          | 8/815 [00:28<40:12,  2.99s/it]Epoch 0, training loss 0.872:   1%|          | 8/815 [00:29<40:12,  2.99s/it]Epoch 0, training loss 0.872:   1%|          | 9/815 [00:30<36:58,  2.75s/it]Epoch 0, training loss 0.859:   1%|          | 9/815 [00:31<36:58,  2.75s/it]Epoch 0, training loss 0.859:   1%|          | 10/815 [00:32<34:05,  2.54s/it]Epoch 0, training loss 0.843:   1%|          | 10/815 [00:33<34:05,  2.54s/it]Epoch 0, training loss 0.843:   1%|▏         | 11/815 [00:35<32:48,  2.45s/it]Epoch 0, training loss 0.827:   1%|▏         | 11/815 [00:35<32:48,  2.45s/it]Epoch 0, training loss 0.827:   1%|▏         | 12/815 [00:37<31:25,  2.35s/it]Epoch 0, training loss 0.808:   1%|▏         | 12/815 [00:38<31:25,  2.35s/it]Epoch 0, training loss 0.808:   2%|▏         | 13/815 [00:39<30:57,  2.32s/it]Epoch 0, training loss 0.789:   2%|▏         | 13/815 [00:40<30:57,  2.32s/it]Epoch 0, training loss 0.789:   2%|▏         | 14/815 [00:41<29:58,  2.25s/it]Epoch 0, training loss 0.779:   2%|▏         | 14/815 [00:42<29:58,  2.25s/it]Epoch 0, training loss 0.779:   2%|▏         | 15/815 [00:43<29:47,  2.23s/it]Epoch 0, training loss 0.766:   2%|▏         | 15/815 [00:44<29:47,  2.23s/it]Epoch 0, training loss 0.766:   2%|▏         | 16/815 [00:45<29:25,  2.21s/it]Epoch 0, training loss 0.758:   2%|▏         | 16/815 [00:46<29:25,  2.21s/it]Epoch 0, training loss 0.758:   2%|▏         | 17/815 [00:48<29:22,  2.21s/it]Epoch 0, training loss 0.753:   2%|▏         | 17/815 [00:48<29:22,  2.21s/it]Epoch 0, training loss 0.753:   2%|▏         | 18/815 [00:50<28:47,  2.17s/it]Epoch 0, training loss 0.740:   2%|▏         | 18/815 [00:51<28:47,  2.17s/it]Epoch 0, training loss 0.740:   2%|▏         | 19/815 [00:52<29:06,  2.19s/it]Epoch 0, training loss 0.735:   2%|▏         | 19/815 [00:53<29:06,  2.19s/it]Epoch 0, training loss 0.735:   2%|▏         | 20/815 [00:54<28:42,  2.17s/it]Epoch 0, training loss 0.724:   2%|▏         | 20/815 [00:55<28:42,  2.17s/it]Epoch 0, training loss 0.724:   3%|▎         | 21/815 [00:56<29:03,  2.20s/it]Epoch 0, training loss 0.720:   3%|▎         | 21/815 [00:57<29:03,  2.20s/it]Epoch 0, training loss 0.720:   3%|▎         | 22/815 [00:58<28:33,  2.16s/it]Epoch 0, training loss 0.709:   3%|▎         | 22/815 [00:59<28:33,  2.16s/it]Epoch 0, training loss 0.709:   3%|▎         | 23/815 [01:01<28:49,  2.18s/it]Epoch 0, training loss 0.702:   3%|▎         | 23/815 [01:01<28:49,  2.18s/it]Epoch 0, training loss 0.702:   3%|▎         | 24/815 [01:03<28:22,  2.15s/it]Epoch 0, training loss 0.699:   3%|▎         | 24/815 [01:04<28:22,  2.15s/it]Epoch 0, training loss 0.699:   3%|▎         | 25/815 [01:05<28:53,  2.19s/it]Epoch 0, training loss 0.692:   3%|▎         | 25/815 [01:06<28:53,  2.19s/it]Epoch 0, training loss 0.692:   3%|▎         | 26/815 [01:07<28:33,  2.17s/it]Epoch 0, training loss 0.687:   3%|▎         | 26/815 [01:08<28:33,  2.17s/it]Epoch 0, training loss 0.687:   3%|▎         | 27/815 [01:09<28:49,  2.19s/it]Epoch 0, training loss 0.681:   3%|▎         | 27/815 [01:10<28:49,  2.19s/it]Epoch 0, training loss 0.681:   3%|▎         | 28/815 [01:12<28:17,  2.16s/it]Epoch 0, training loss 0.674:   3%|▎         | 28/815 [01:12<28:17,  2.16s/it]Epoch 0, training loss 0.674:   4%|▎         | 29/815 [01:14<28:27,  2.17s/it]Epoch 0, training loss 0.668:   4%|▎         | 29/815 [01:15<28:27,  2.17s/it]Epoch 0, training loss 0.668:   4%|▎         | 30/815 [01:16<28:13,  2.16s/it]Epoch 0, training loss 0.662:   4%|▎         | 30/815 [01:17<28:13,  2.16s/it]Epoch 0, training loss 0.662:   4%|▍         | 31/815 [01:18<28:42,  2.20s/it]Epoch 0, training loss 0.664:   4%|▍         | 31/815 [01:19<28:42,  2.20s/it]Epoch 0, training loss 0.664:   4%|▍         | 32/815 [01:20<28:19,  2.17s/it]Epoch 0, training loss 0.656:   4%|▍         | 32/815 [01:21<28:19,  2.17s/it]Epoch 0, training loss 0.656:   4%|▍         | 33/815 [01:22<28:38,  2.20s/it]Epoch 0, training loss 0.655:   4%|▍         | 33/815 [01:23<28:38,  2.20s/it]Epoch 0, training loss 0.655:   4%|▍         | 34/815 [01:25<28:12,  2.17s/it]Epoch 0, training loss 0.654:   4%|▍         | 34/815 [01:25<28:12,  2.17s/it]Epoch 0, training loss 0.654:   4%|▍         | 35/815 [01:27<28:36,  2.20s/it]Epoch 0, training loss 0.650:   4%|▍         | 35/815 [01:28<28:36,  2.20s/it]Epoch 0, training loss 0.650:   4%|▍         | 36/815 [01:29<28:16,  2.18s/it]Epoch 0, training loss 0.643:   4%|▍         | 36/815 [01:30<28:16,  2.18s/it]Epoch 0, training loss 0.643:   5%|▍         | 37/815 [01:31<28:35,  2.20s/it]Epoch 0, training loss 0.640:   5%|▍         | 37/815 [01:32<28:35,  2.20s/it]Epoch 0, training loss 0.640:   5%|▍         | 38/815 [01:33<28:09,  2.17s/it]Epoch 0, training loss 0.633:   5%|▍         | 38/815 [01:34<28:09,  2.17s/it]Epoch 0, training loss 0.633:   5%|▍         | 39/815 [01:36<28:23,  2.20s/it]Epoch 0, training loss 0.646:   5%|▍         | 39/815 [01:36<28:23,  2.20s/it]Epoch 0, training loss 0.646:   5%|▍         | 40/815 [01:38<27:55,  2.16s/it]Epoch 0, training loss 0.641:   5%|▍         | 40/815 [01:39<27:55,  2.16s/it]Epoch 0, training loss 0.641:   5%|▌         | 41/815 [01:40<28:20,  2.20s/it]Epoch 0, training loss 0.635:   5%|▌         | 41/815 [01:41<28:20,  2.20s/it]Epoch 0, training loss 0.635:   5%|▌         | 42/815 [01:42<27:54,  2.17s/it]Epoch 0, training loss 0.635:   5%|▌         | 42/815 [01:43<27:54,  2.17s/it]Epoch 0, training loss 0.635:   5%|▌         | 43/815 [01:44<28:16,  2.20s/it]Epoch 0, training loss 0.636:   5%|▌         | 43/815 [01:45<28:16,  2.20s/it]Epoch 0, training loss 0.636:   5%|▌         | 44/815 [01:46<27:53,  2.17s/it]Epoch 0, training loss 0.631:   5%|▌         | 44/815 [01:47<27:53,  2.17s/it]Epoch 0, training loss 0.631:   6%|▌         | 45/815 [01:49<28:07,  2.19s/it]Epoch 0, training loss 0.627:   6%|▌         | 45/815 [01:49<28:07,  2.19s/it]Epoch 0, training loss 0.627:   6%|▌         | 46/815 [01:51<27:43,  2.16s/it]Epoch 0, training loss 0.626:   6%|▌         | 46/815 [01:52<27:43,  2.16s/it]Epoch 0, training loss 0.626:   6%|▌         | 47/815 [01:53<28:08,  2.20s/it]Epoch 0, training loss 0.621:   6%|▌         | 47/815 [01:54<28:08,  2.20s/it]Epoch 0, training loss 0.621:   6%|▌         | 48/815 [01:55<27:45,  2.17s/it]Epoch 0, training loss 0.619:   6%|▌         | 48/815 [01:56<27:45,  2.17s/it]Epoch 0, training loss 0.619:   6%|▌         | 49/815 [01:57<28:06,  2.20s/it]Epoch 0, training loss 0.618:   6%|▌         | 49/815 [01:58<28:06,  2.20s/it]Epoch 0, training loss 0.618:   6%|▌         | 50/815 [02:00<27:45,  2.18s/it]Epoch 0, training loss 0.617:   6%|▌         | 50/815 [02:00<27:45,  2.18s/it]Epoch 0, training loss 0.617:   6%|▋         | 51/815 [02:02<27:55,  2.19s/it]Epoch 0, training loss 0.615:   6%|▋         | 51/815 [02:03<27:55,  2.19s/it]Epoch 0, training loss 0.615:   6%|▋         | 52/815 [02:04<27:30,  2.16s/it]Epoch 0, training loss 0.614:   6%|▋         | 52/815 [02:05<27:30,  2.16s/it]Epoch 0, training loss 0.614:   7%|▋         | 53/815 [02:06<27:52,  2.20s/it]Epoch 0, training loss 0.611:   7%|▋         | 53/815 [02:07<27:52,  2.20s/it]Epoch 0, training loss 0.611:   7%|▋         | 54/815 [02:08<27:32,  2.17s/it]Epoch 0, training loss 0.610:   7%|▋         | 54/815 [02:09<27:32,  2.17s/it]Epoch 0, training loss 0.610:   7%|▋         | 55/815 [02:11<27:58,  2.21s/it]Epoch 0, training loss 0.609:   7%|▋         | 55/815 [02:11<27:58,  2.21s/it]Epoch 0, training loss 0.609:   7%|▋         | 56/815 [02:13<27:40,  2.19s/it]Epoch 0, training loss 0.606:   7%|▋         | 56/815 [02:14<27:40,  2.19s/it]Epoch 0, training loss 0.606:   7%|▋         | 57/815 [02:15<27:55,  2.21s/it]Epoch 0, training loss 0.601:   7%|▋         | 57/815 [02:16<27:55,  2.21s/it]Epoch 0, training loss 0.601:   7%|▋         | 58/815 [02:17<27:56,  2.21s/it]Epoch 0, training loss 0.601:   7%|▋         | 58/815 [02:18<27:56,  2.21s/it]Epoch 0, training loss 0.601:   7%|▋         | 59/815 [02:19<28:10,  2.24s/it]Epoch 0, training loss 0.596:   7%|▋         | 59/815 [02:20<28:10,  2.24s/it]Epoch 0, training loss 0.596:   7%|▋         | 60/815 [02:22<27:35,  2.19s/it]Epoch 0, training loss 0.595:   7%|▋         | 60/815 [02:22<27:35,  2.19s/it]Epoch 0, training loss 0.595:   7%|▋         | 61/815 [02:24<27:46,  2.21s/it]Epoch 0, training loss 0.590:   7%|▋         | 61/815 [02:25<27:46,  2.21s/it]Epoch 0, training loss 0.590:   8%|▊         | 62/815 [02:26<27:23,  2.18s/it]Epoch 0, training loss 0.586:   8%|▊         | 62/815 [02:27<27:23,  2.18s/it]Epoch 0, training loss 0.586:   8%|▊         | 63/815 [02:28<27:39,  2.21s/it]Epoch 0, training loss 0.583:   8%|▊         | 63/815 [02:29<27:39,  2.21s/it]Epoch 0, training loss 0.583:   8%|▊         | 64/815 [02:30<27:18,  2.18s/it]Epoch 0, training loss 0.581:   8%|▊         | 64/815 [02:31<27:18,  2.18s/it]Epoch 0, training loss 0.581:   8%|▊         | 65/815 [02:33<27:36,  2.21s/it]Epoch 0, training loss 0.579:   8%|▊         | 65/815 [02:33<27:36,  2.21s/it]Epoch 0, training loss 0.579:   8%|▊         | 66/815 [02:35<27:12,  2.18s/it]Epoch 0, training loss 0.583:   8%|▊         | 66/815 [02:36<27:12,  2.18s/it]Epoch 0, training loss 0.583:   8%|▊         | 67/815 [02:37<27:35,  2.21s/it]Epoch 0, training loss 0.580:   8%|▊         | 67/815 [02:38<27:35,  2.21s/it]Epoch 0, training loss 0.580:   8%|▊         | 68/815 [02:39<27:09,  2.18s/it]Epoch 0, training loss 0.577:   8%|▊         | 68/815 [02:40<27:09,  2.18s/it]Epoch 0, training loss 0.577:   8%|▊         | 69/815 [02:41<27:28,  2.21s/it]Epoch 0, training loss 0.573:   8%|▊         | 69/815 [02:42<27:28,  2.21s/it]Epoch 0, training loss 0.573:   9%|▊         | 70/815 [02:44<27:09,  2.19s/it]Epoch 0, training loss 0.577:   9%|▊         | 70/815 [02:44<27:09,  2.19s/it]Epoch 0, training loss 0.577:   9%|▊         | 71/815 [02:46<27:27,  2.21s/it]Epoch 0, training loss 0.574:   9%|▊         | 71/815 [02:47<27:27,  2.21s/it]Epoch 0, training loss 0.574:   9%|▉         | 72/815 [02:48<27:07,  2.19s/it]Epoch 0, training loss 0.571:   9%|▉         | 72/815 [02:49<27:07,  2.19s/it]Epoch 0, training loss 0.571:   9%|▉         | 73/815 [02:50<27:27,  2.22s/it]Epoch 0, training loss 0.569:   9%|▉         | 73/815 [02:51<27:27,  2.22s/it]Epoch 0, training loss 0.569:   9%|▉         | 74/815 [02:52<27:02,  2.19s/it]Epoch 0, training loss 0.567:   9%|▉         | 74/815 [02:53<27:02,  2.19s/it]Epoch 0, training loss 0.567:   9%|▉         | 75/815 [02:55<27:26,  2.22s/it]Epoch 0, training loss 0.568:   9%|▉         | 75/815 [02:55<27:26,  2.22s/it]Epoch 0, training loss 0.568:   9%|▉         | 76/815 [02:57<26:58,  2.19s/it]Epoch 0, training loss 0.564:   9%|▉         | 76/815 [02:58<26:58,  2.19s/it]Epoch 0, training loss 0.564:   9%|▉         | 77/815 [02:59<27:14,  2.22s/it]Epoch 0, training loss 0.562:   9%|▉         | 77/815 [03:00<27:14,  2.22s/it]Epoch 0, training loss 0.562:  10%|▉         | 78/815 [03:01<26:58,  2.20s/it]Epoch 0, training loss 0.561:  10%|▉         | 78/815 [03:02<26:58,  2.20s/it]Epoch 0, training loss 0.561:  10%|▉         | 79/815 [03:03<27:22,  2.23s/it]Epoch 0, training loss 0.560:  10%|▉         | 79/815 [03:04<27:22,  2.23s/it]Epoch 0, training loss 0.560:  10%|▉         | 80/815 [03:06<26:54,  2.20s/it]Epoch 0, training loss 0.557:  10%|▉         | 80/815 [03:07<26:54,  2.20s/it]Epoch 0, training loss 0.557:  10%|▉         | 81/815 [03:08<27:18,  2.23s/it]Epoch 0, training loss 0.555:  10%|▉         | 81/815 [03:09<27:18,  2.23s/it]Epoch 0, training loss 0.555:  10%|█         | 82/815 [03:10<26:57,  2.21s/it]Epoch 0, training loss 0.553:  10%|█         | 82/815 [03:11<26:57,  2.21s/it]Epoch 0, training loss 0.553:  10%|█         | 83/815 [03:12<27:16,  2.24s/it]Epoch 0, training loss 0.551:  10%|█         | 83/815 [03:13<27:16,  2.24s/it]Epoch 0, training loss 0.551:  10%|█         | 84/815 [03:15<26:49,  2.20s/it]Epoch 0, training loss 0.551:  10%|█         | 84/815 [03:15<26:49,  2.20s/it]Epoch 0, training loss 0.551:  10%|█         | 85/815 [03:17<27:11,  2.23s/it]Epoch 0, training loss 0.551:  10%|█         | 85/815 [03:18<27:11,  2.23s/it]Epoch 0, training loss 0.551:  11%|█         | 86/815 [03:19<26:44,  2.20s/it]Epoch 0, training loss 0.549:  11%|█         | 86/815 [03:20<26:44,  2.20s/it]Epoch 0, training loss 0.549:  11%|█         | 87/815 [03:21<26:55,  2.22s/it]Epoch 0, training loss 0.547:  11%|█         | 87/815 [03:22<26:55,  2.22s/it]Epoch 0, training loss 0.547:  11%|█         | 88/815 [03:23<26:33,  2.19s/it]Epoch 0, training loss 0.547:  11%|█         | 88/815 [03:24<26:33,  2.19s/it]Epoch 0, training loss 0.547:  11%|█         | 89/815 [03:26<26:55,  2.22s/it]Epoch 0, training loss 0.546:  11%|█         | 89/815 [03:26<26:55,  2.22s/it]Epoch 0, training loss 0.546:  11%|█         | 90/815 [03:28<26:39,  2.21s/it]Epoch 0, training loss 0.545:  11%|█         | 90/815 [03:29<26:39,  2.21s/it]Epoch 0, training loss 0.545:  11%|█         | 91/815 [03:30<26:48,  2.22s/it]Epoch 0, training loss 0.544:  11%|█         | 91/815 [03:31<26:48,  2.22s/it]Epoch 0, training loss 0.544:  11%|█▏        | 92/815 [03:32<26:29,  2.20s/it]Epoch 0, training loss 0.542:  11%|█▏        | 92/815 [03:33<26:29,  2.20s/it]Epoch 0, training loss 0.542:  11%|█▏        | 93/815 [03:34<26:48,  2.23s/it]Epoch 0, training loss 0.542:  11%|█▏        | 93/815 [03:35<26:48,  2.23s/it]Epoch 0, training loss 0.542:  12%|█▏        | 94/815 [03:37<26:22,  2.19s/it]Epoch 0, training loss 0.540:  12%|█▏        | 94/815 [03:38<26:22,  2.19s/it]Epoch 0, training loss 0.540:  12%|█▏        | 95/815 [03:39<26:45,  2.23s/it]Epoch 0, training loss 0.538:  12%|█▏        | 95/815 [03:40<26:45,  2.23s/it]Epoch 0, training loss 0.538:  12%|█▏        | 96/815 [03:41<26:19,  2.20s/it]Epoch 0, training loss 0.536:  12%|█▏        | 96/815 [03:42<26:19,  2.20s/it]Epoch 0, training loss 0.536:  12%|█▏        | 97/815 [03:43<26:44,  2.23s/it]Epoch 0, training loss 0.535:  12%|█▏        | 97/815 [03:44<26:44,  2.23s/it]Epoch 0, training loss 0.535:  12%|█▏        | 98/815 [03:45<26:18,  2.20s/it]Epoch 0, training loss 0.535:  12%|█▏        | 98/815 [03:46<26:18,  2.20s/it]Epoch 0, training loss 0.535:  12%|█▏        | 99/815 [03:48<26:41,  2.24s/it]Epoch 0, training loss 0.533:  12%|█▏        | 99/815 [03:49<26:41,  2.24s/it]Epoch 0, training loss 0.533:  12%|█▏        | 100/815 [03:50<26:22,  2.21s/it]Epoch 0, training loss 0.532:  12%|█▏        | 100/815 [03:51<26:22,  2.21s/it]Epoch 0, training loss 0.532:  12%|█▏        | 101/815 [03:52<26:41,  2.24s/it]Epoch 0, training loss 0.530:  12%|█▏        | 101/815 [03:53<26:41,  2.24s/it]Epoch 0, training loss 0.530:  13%|█▎        | 102/815 [03:54<26:13,  2.21s/it]Epoch 0, training loss 0.528:  13%|█▎        | 102/815 [03:55<26:13,  2.21s/it]Epoch 0, training loss 0.528:  13%|█▎        | 103/815 [03:57<26:35,  2.24s/it]Epoch 0, training loss 0.526:  13%|█▎        | 103/815 [03:57<26:35,  2.24s/it]Epoch 0, training loss 0.526:  13%|█▎        | 104/815 [03:59<26:12,  2.21s/it]Epoch 0, training loss 0.525:  13%|█▎        | 104/815 [04:00<26:12,  2.21s/it]Epoch 0, training loss 0.525:  13%|█▎        | 105/815 [04:01<26:32,  2.24s/it]Epoch 0, training loss 0.524:  13%|█▎        | 105/815 [04:02<26:32,  2.24s/it]Epoch 0, training loss 0.524:  13%|█▎        | 106/815 [04:03<26:06,  2.21s/it]Epoch 0, training loss 0.524:  13%|█▎        | 106/815 [04:04<26:06,  2.21s/it]Epoch 0, training loss 0.524:  13%|█▎        | 107/815 [04:06<26:25,  2.24s/it]Epoch 0, training loss 0.524:  13%|█▎        | 107/815 [04:06<26:25,  2.24s/it]Epoch 0, training loss 0.524:  13%|█▎        | 108/815 [04:08<26:00,  2.21s/it]Epoch 0, training loss 0.524:  13%|█▎        | 108/815 [04:09<26:00,  2.21s/it]Epoch 0, training loss 0.524:  13%|█▎        | 109/815 [04:10<26:24,  2.24s/it]Epoch 0, training loss 0.524:  13%|█▎        | 109/815 [04:11<26:24,  2.24s/it]Epoch 0, training loss 0.524:  13%|█▎        | 110/815 [04:12<26:01,  2.21s/it]Epoch 0, training loss 0.522:  13%|█▎        | 110/815 [04:13<26:01,  2.21s/it]Epoch 0, training loss 0.522:  14%|█▎        | 111/815 [04:15<26:22,  2.25s/it]Epoch 0, training loss 0.521:  14%|█▎        | 111/815 [04:15<26:22,  2.25s/it]Epoch 0, training loss 0.521:  14%|█▎        | 112/815 [04:17<25:57,  2.22s/it]Epoch 0, training loss 0.521:  14%|█▎        | 112/815 [04:18<25:57,  2.22s/it]Epoch 0, training loss 0.521:  14%|█▍        | 113/815 [04:19<26:15,  2.24s/it]Epoch 0, training loss 0.519:  14%|█▍        | 113/815 [04:20<26:15,  2.24s/it]Epoch 0, training loss 0.519:  14%|█▍        | 114/815 [04:21<25:51,  2.21s/it]Epoch 0, training loss 0.520:  14%|█▍        | 114/815 [04:22<25:51,  2.21s/it]Epoch 0, training loss 0.520:  14%|█▍        | 115/815 [04:23<26:10,  2.24s/it]Epoch 0, training loss 0.521:  14%|█▍        | 115/815 [04:24<26:10,  2.24s/it]Epoch 0, training loss 0.521:  14%|█▍        | 116/815 [04:26<25:49,  2.22s/it]Epoch 0, training loss 0.519:  14%|█▍        | 116/815 [04:27<25:49,  2.22s/it]Epoch 0, training loss 0.519:  14%|█▍        | 117/815 [04:28<26:13,  2.25s/it]Epoch 0, training loss 0.518:  14%|█▍        | 117/815 [04:29<26:13,  2.25s/it]Epoch 0, training loss 0.518:  14%|█▍        | 118/815 [04:30<25:52,  2.23s/it]Epoch 0, training loss 0.516:  14%|█▍        | 118/815 [04:31<25:52,  2.23s/it]Epoch 0, training loss 0.516:  15%|█▍        | 119/815 [04:32<26:11,  2.26s/it]Epoch 0, training loss 0.515:  15%|█▍        | 119/815 [04:33<26:11,  2.26s/it]Epoch 0, training loss 0.515:  15%|█▍        | 120/815 [04:35<25:51,  2.23s/it]Epoch 0, training loss 0.517:  15%|█▍        | 120/815 [04:36<25:51,  2.23s/it]Epoch 0, training loss 0.517:  15%|█▍        | 121/815 [04:37<26:14,  2.27s/it]Epoch 0, training loss 0.517:  15%|█▍        | 121/815 [04:38<26:14,  2.27s/it]Epoch 0, training loss 0.517:  15%|█▍        | 122/815 [04:39<25:50,  2.24s/it]Epoch 0, training loss 0.517:  15%|█▍        | 122/815 [04:40<25:50,  2.24s/it]Epoch 0, training loss 0.517:  15%|█▌        | 123/815 [04:41<26:07,  2.26s/it]Epoch 0, training loss 0.515:  15%|█▌        | 123/815 [04:42<26:07,  2.26s/it]Epoch 0, training loss 0.515:  15%|█▌        | 124/815 [04:44<25:42,  2.23s/it]Epoch 0, training loss 0.514:  15%|█▌        | 124/815 [04:45<25:42,  2.23s/it]Epoch 0, training loss 0.514:  15%|█▌        | 125/815 [04:46<26:02,  2.26s/it]Epoch 0, training loss 0.513:  15%|█▌        | 125/815 [04:47<26:02,  2.26s/it]Epoch 0, training loss 0.513:  15%|█▌        | 126/815 [04:48<25:36,  2.23s/it]Epoch 0, training loss 0.512:  15%|█▌        | 126/815 [04:49<25:36,  2.23s/it]Epoch 0, training loss 0.512:  16%|█▌        | 127/815 [04:50<25:57,  2.26s/it]Epoch 0, training loss 0.511:  16%|█▌        | 127/815 [04:51<25:57,  2.26s/it]Epoch 0, training loss 0.511:  16%|█▌        | 128/815 [04:53<25:32,  2.23s/it]Epoch 0, training loss 0.509:  16%|█▌        | 128/815 [04:53<25:32,  2.23s/it]Epoch 0, training loss 0.509:  16%|█▌        | 129/815 [04:55<25:54,  2.27s/it]Epoch 0, training loss 0.508:  16%|█▌        | 129/815 [04:56<25:54,  2.27s/it]Epoch 0, training loss 0.508:  16%|█▌        | 130/815 [04:57<25:33,  2.24s/it]Epoch 0, training loss 0.508:  16%|█▌        | 130/815 [04:58<25:33,  2.24s/it]Epoch 0, training loss 0.508:  16%|█▌        | 131/815 [04:59<25:54,  2.27s/it]Epoch 0, training loss 0.507:  16%|█▌        | 131/815 [05:00<25:54,  2.27s/it]Epoch 0, training loss 0.507:  16%|█▌        | 132/815 [05:02<25:31,  2.24s/it]Epoch 0, training loss 0.505:  16%|█▌        | 132/815 [05:03<25:31,  2.24s/it]Epoch 0, training loss 0.505:  16%|█▋        | 133/815 [05:04<25:49,  2.27s/it]Epoch 0, training loss 0.504:  16%|█▋        | 133/815 [05:05<25:49,  2.27s/it]Epoch 0, training loss 0.504:  16%|█▋        | 134/815 [05:06<25:25,  2.24s/it]Epoch 0, training loss 0.503:  16%|█▋        | 134/815 [05:07<25:25,  2.24s/it]Epoch 0, training loss 0.503:  17%|█▋        | 135/815 [05:09<25:50,  2.28s/it]Epoch 0, training loss 0.502:  17%|█▋        | 135/815 [05:09<25:50,  2.28s/it]Epoch 0, training loss 0.502:  17%|█▋        | 136/815 [05:11<25:26,  2.25s/it]Epoch 0, training loss 0.501:  17%|█▋        | 136/815 [05:12<25:26,  2.25s/it]Epoch 0, training loss 0.501:  17%|█▋        | 137/815 [05:13<25:49,  2.29s/it]Epoch 0, training loss 0.500:  17%|█▋        | 137/815 [05:14<25:49,  2.29s/it]Epoch 0, training loss 0.500:  17%|█▋        | 138/815 [05:15<25:30,  2.26s/it]Epoch 0, training loss 0.499:  17%|█▋        | 138/815 [05:16<25:30,  2.26s/it]Epoch 0, training loss 0.499:  17%|█▋        | 139/815 [05:18<25:41,  2.28s/it]Epoch 0, training loss 0.498:  17%|█▋        | 139/815 [05:18<25:41,  2.28s/it]Epoch 0, training loss 0.498:  17%|█▋        | 140/815 [05:20<25:19,  2.25s/it]Epoch 0, training loss 0.497:  17%|█▋        | 140/815 [05:21<25:19,  2.25s/it]Epoch 0, training loss 0.497:  17%|█▋        | 141/815 [05:22<25:38,  2.28s/it]Epoch 0, training loss 0.496:  17%|█▋        | 141/815 [05:23<25:38,  2.28s/it]Epoch 0, training loss 0.496:  17%|█▋        | 142/815 [05:24<25:24,  2.27s/it]Epoch 0, training loss 0.494:  17%|█▋        | 142/815 [05:25<25:24,  2.27s/it]Epoch 0, training loss 0.494:  18%|█▊        | 143/815 [05:27<25:43,  2.30s/it]Epoch 0, training loss 0.494:  18%|█▊        | 143/815 [05:28<25:43,  2.30s/it]Epoch 0, training loss 0.494:  18%|█▊        | 144/815 [05:29<25:27,  2.28s/it]Epoch 0, training loss 0.493:  18%|█▊        | 144/815 [05:30<25:27,  2.28s/it]Epoch 0, training loss 0.493:  18%|█▊        | 145/815 [05:31<25:46,  2.31s/it]Epoch 0, training loss 0.491:  18%|█▊        | 145/815 [05:32<25:46,  2.31s/it]Epoch 0, training loss 0.491:  18%|█▊        | 146/815 [05:34<25:20,  2.27s/it]Epoch 0, training loss 0.491:  18%|█▊        | 146/815 [05:34<25:20,  2.27s/it]Epoch 0, training loss 0.491:  18%|█▊        | 147/815 [05:36<25:39,  2.30s/it]Epoch 0, training loss 0.490:  18%|█▊        | 147/815 [05:37<25:39,  2.30s/it]Epoch 0, training loss 0.490:  18%|█▊        | 148/815 [05:38<25:16,  2.27s/it]Epoch 0, training loss 0.489:  18%|█▊        | 148/815 [05:39<25:16,  2.27s/it]Epoch 0, training loss 0.489:  18%|█▊        | 149/815 [05:41<25:37,  2.31s/it]Epoch 0, training loss 0.488:  18%|█▊        | 149/815 [05:41<25:37,  2.31s/it]Epoch 0, training loss 0.488:  18%|█▊        | 150/815 [05:43<25:18,  2.28s/it]Epoch 0, training loss 0.487:  18%|█▊        | 150/815 [05:44<25:18,  2.28s/it]Epoch 0, training loss 0.487:  19%|█▊        | 151/815 [05:45<25:30,  2.31s/it]Epoch 0, training loss 0.486:  19%|█▊        | 151/815 [05:46<25:30,  2.31s/it]Epoch 0, training loss 0.486:  19%|█▊        | 152/815 [05:47<25:13,  2.28s/it]Epoch 0, training loss 0.486:  19%|█▊        | 152/815 [05:48<25:13,  2.28s/it]Epoch 0, training loss 0.486:  19%|█▉        | 153/815 [05:50<25:26,  2.31s/it]Epoch 0, training loss 0.487:  19%|█▉        | 153/815 [05:50<25:26,  2.31s/it]Epoch 0, training loss 0.487:  19%|█▉        | 154/815 [05:52<24:52,  2.26s/it]Epoch 0, training loss 0.486:  19%|█▉        | 154/815 [05:53<24:52,  2.26s/it]Epoch 0, training loss 0.486:  19%|█▉        | 155/815 [05:54<25:10,  2.29s/it]Epoch 0, training loss 0.486:  19%|█▉        | 155/815 [05:55<25:10,  2.29s/it]Epoch 0, training loss 0.486:  19%|█▉        | 156/815 [05:56<24:48,  2.26s/it]Epoch 0, training loss 0.486:  19%|█▉        | 156/815 [05:57<24:48,  2.26s/it]Epoch 0, training loss 0.486:  19%|█▉        | 157/815 [05:59<25:07,  2.29s/it]Epoch 0, training loss 0.486:  19%|█▉        | 157/815 [06:00<25:07,  2.29s/it]Epoch 0, training loss 0.486:  19%|█▉        | 158/815 [06:01<24:54,  2.27s/it]Epoch 0, training loss 0.484:  19%|█▉        | 158/815 [06:02<24:54,  2.27s/it]Epoch 0, training loss 0.484:  20%|█▉        | 159/815 [06:03<25:15,  2.31s/it]Epoch 0, training loss 0.484:  20%|█▉        | 159/815 [06:04<25:15,  2.31s/it]Epoch 0, training loss 0.484:  20%|█▉        | 160/815 [06:06<24:56,  2.29s/it]Epoch 0, training loss 0.484:  20%|█▉        | 160/815 [06:07<24:56,  2.29s/it]Epoch 0, training loss 0.484:  20%|█▉        | 161/815 [06:08<25:19,  2.32s/it]Epoch 0, training loss 0.484:  20%|█▉        | 161/815 [06:09<25:19,  2.32s/it]Epoch 0, training loss 0.484:  20%|█▉        | 162/815 [06:10<25:01,  2.30s/it]Epoch 0, training loss 0.483:  20%|█▉        | 162/815 [06:11<25:01,  2.30s/it]Epoch 0, training loss 0.483:  20%|██        | 163/815 [06:13<25:10,  2.32s/it]Epoch 0, training loss 0.483:  20%|██        | 163/815 [06:13<25:10,  2.32s/it]Epoch 0, training loss 0.483:  20%|██        | 164/815 [06:15<24:46,  2.28s/it]Epoch 0, training loss 0.482:  20%|██        | 164/815 [06:16<24:46,  2.28s/it]Epoch 0, training loss 0.482:  20%|██        | 165/815 [06:17<25:03,  2.31s/it]Epoch 0, training loss 0.482:  20%|██        | 165/815 [06:18<25:03,  2.31s/it]Epoch 0, training loss 0.482:  20%|██        | 166/815 [06:19<24:51,  2.30s/it]Epoch 0, training loss 0.482:  20%|██        | 166/815 [06:20<24:51,  2.30s/it]Epoch 0, training loss 0.482:  20%|██        | 167/815 [06:22<25:09,  2.33s/it]Epoch 0, training loss 0.481:  20%|██        | 167/815 [06:23<25:09,  2.33s/it]Epoch 0, training loss 0.481:  21%|██        | 168/815 [06:24<24:51,  2.31s/it]Epoch 0, training loss 0.481:  21%|██        | 168/815 [06:25<24:51,  2.31s/it]Epoch 0, training loss 0.481:  21%|██        | 169/815 [06:27<25:12,  2.34s/it]Epoch 0, training loss 0.480:  21%|██        | 169/815 [06:27<25:12,  2.34s/it]Epoch 0, training loss 0.480:  21%|██        | 170/815 [06:29<24:51,  2.31s/it]Epoch 0, training loss 0.480:  21%|██        | 170/815 [06:30<24:51,  2.31s/it]Epoch 0, training loss 0.480:  21%|██        | 171/815 [06:31<24:49,  2.31s/it]Epoch 0, training loss 0.479:  21%|██        | 171/815 [06:32<24:49,  2.31s/it]Epoch 0, training loss 0.479:  21%|██        | 172/815 [06:33<24:29,  2.29s/it]Epoch 0, training loss 0.478:  21%|██        | 172/815 [06:34<24:29,  2.29s/it]Epoch 0, training loss 0.478:  21%|██        | 173/815 [06:36<24:51,  2.32s/it]Epoch 0, training loss 0.477:  21%|██        | 173/815 [06:37<24:51,  2.32s/it]Epoch 0, training loss 0.477:  21%|██▏       | 174/815 [06:38<24:31,  2.30s/it]Epoch 0, training loss 0.476:  21%|██▏       | 174/815 [06:39<24:31,  2.30s/it]Epoch 0, training loss 0.476:  21%|██▏       | 175/815 [06:40<24:45,  2.32s/it]Epoch 0, training loss 0.475:  21%|██▏       | 175/815 [06:41<24:45,  2.32s/it]Epoch 0, training loss 0.475:  22%|██▏       | 176/815 [06:43<24:22,  2.29s/it]Epoch 0, training loss 0.474:  22%|██▏       | 176/815 [06:44<24:22,  2.29s/it]Epoch 0, training loss 0.474:  22%|██▏       | 177/815 [06:45<24:44,  2.33s/it]Epoch 0, training loss 0.474:  22%|██▏       | 177/815 [06:46<24:44,  2.33s/it]Epoch 0, training loss 0.474:  22%|██▏       | 178/815 [06:47<24:15,  2.29s/it]Epoch 0, training loss 0.473:  22%|██▏       | 178/815 [06:48<24:15,  2.29s/it]Epoch 0, training loss 0.473:  22%|██▏       | 179/815 [06:50<24:28,  2.31s/it]Epoch 0, training loss 0.472:  22%|██▏       | 179/815 [06:50<24:28,  2.31s/it]Epoch 0, training loss 0.472:  22%|██▏       | 180/815 [06:52<24:07,  2.28s/it]Epoch 0, training loss 0.471:  22%|██▏       | 180/815 [06:53<24:07,  2.28s/it]Epoch 0, training loss 0.471:  22%|██▏       | 181/815 [06:54<24:20,  2.30s/it]Epoch 0, training loss 0.473:  22%|██▏       | 181/815 [06:55<24:20,  2.30s/it]Epoch 0, training loss 0.473:  22%|██▏       | 182/815 [06:56<24:08,  2.29s/it]Epoch 0, training loss 0.472:  22%|██▏       | 182/815 [06:57<24:08,  2.29s/it]Epoch 0, training loss 0.472:  22%|██▏       | 183/815 [06:59<24:25,  2.32s/it]Epoch 0, training loss 0.472:  22%|██▏       | 183/815 [07:00<24:25,  2.32s/it]Epoch 0, training loss 0.472:  23%|██▎       | 184/815 [07:01<24:05,  2.29s/it]Epoch 0, training loss 0.471:  23%|██▎       | 184/815 [07:02<24:05,  2.29s/it]Epoch 0, training loss 0.471:  23%|██▎       | 185/815 [07:03<24:22,  2.32s/it]Epoch 0, training loss 0.470:  23%|██▎       | 185/815 [07:04<24:22,  2.32s/it]Epoch 0, training loss 0.470:  23%|██▎       | 186/815 [07:06<23:59,  2.29s/it]Epoch 0, training loss 0.470:  23%|██▎       | 186/815 [07:06<23:59,  2.29s/it]Epoch 0, training loss 0.470:  23%|██▎       | 187/815 [07:08<24:16,  2.32s/it]Epoch 0, training loss 0.469:  23%|██▎       | 187/815 [07:09<24:16,  2.32s/it]Epoch 0, training loss 0.469:  23%|██▎       | 188/815 [07:10<23:54,  2.29s/it]Epoch 0, training loss 0.469:  23%|██▎       | 188/815 [07:11<23:54,  2.29s/it]Epoch 0, training loss 0.469:  23%|██▎       | 189/815 [07:13<24:08,  2.31s/it]Epoch 0, training loss 0.469:  23%|██▎       | 189/815 [07:13<24:08,  2.31s/it]Epoch 0, training loss 0.469:  23%|██▎       | 190/815 [07:15<23:57,  2.30s/it]Epoch 0, training loss 0.468:  23%|██▎       | 190/815 [07:16<23:57,  2.30s/it]Epoch 0, training loss 0.468:  23%|██▎       | 191/815 [07:17<24:12,  2.33s/it]Epoch 0, training loss 0.467:  23%|██▎       | 191/815 [07:18<24:12,  2.33s/it]Epoch 0, training loss 0.467:  24%|██▎       | 192/815 [07:19<23:50,  2.30s/it]Epoch 0, training loss 0.466:  24%|██▎       | 192/815 [07:20<23:50,  2.30s/it]Epoch 0, training loss 0.466:  24%|██▎       | 193/815 [07:22<24:10,  2.33s/it]Epoch 0, training loss 0.465:  24%|██▎       | 193/815 [07:23<24:10,  2.33s/it]Epoch 0, training loss 0.465:  24%|██▍       | 194/815 [07:24<23:46,  2.30s/it]Epoch 0, training loss 0.465:  24%|██▍       | 194/815 [07:25<23:46,  2.30s/it]Epoch 0, training loss 0.465:  24%|██▍       | 195/815 [07:26<23:56,  2.32s/it]Epoch 0, training loss 0.464:  24%|██▍       | 195/815 [07:27<23:56,  2.32s/it]Epoch 0, training loss 0.464:  24%|██▍       | 196/815 [07:29<23:36,  2.29s/it]Epoch 0, training loss 0.463:  24%|██▍       | 196/815 [07:30<23:36,  2.29s/it]Epoch 0, training loss 0.463:  24%|██▍       | 197/815 [07:31<23:46,  2.31s/it]Epoch 0, training loss 0.462:  24%|██▍       | 197/815 [07:32<23:46,  2.31s/it]Epoch 0, training loss 0.462:  24%|██▍       | 198/815 [07:33<23:28,  2.28s/it]Epoch 0, training loss 0.462:  24%|██▍       | 198/815 [07:34<23:28,  2.28s/it]Epoch 0, training loss 0.462:  24%|██▍       | 199/815 [07:36<23:41,  2.31s/it]Epoch 0, training loss 0.461:  24%|██▍       | 199/815 [07:36<23:41,  2.31s/it]Epoch 0, training loss 0.461:  25%|██▍       | 200/815 [07:38<23:24,  2.28s/it]Epoch 0, training loss 0.460:  25%|██▍       | 200/815 [07:39<23:24,  2.28s/it]Epoch 0, training loss 0.460:  25%|██▍       | 201/815 [07:40<23:44,  2.32s/it]Epoch 0, training loss 0.460:  25%|██▍       | 201/815 [07:41<23:44,  2.32s/it]Epoch 0, training loss 0.460:  25%|██▍       | 202/815 [07:42<23:15,  2.28s/it]Epoch 0, training loss 0.461:  25%|██▍       | 202/815 [07:43<23:15,  2.28s/it]Epoch 0, training loss 0.461:  25%|██▍       | 203/815 [07:45<23:38,  2.32s/it]Epoch 0, training loss 0.461:  25%|██▍       | 203/815 [07:46<23:38,  2.32s/it]Epoch 0, training loss 0.461:  25%|██▌       | 204/815 [07:47<23:18,  2.29s/it]Epoch 0, training loss 0.461:  25%|██▌       | 204/815 [07:48<23:18,  2.29s/it]Epoch 0, training loss 0.461:  25%|██▌       | 205/815 [07:49<23:20,  2.30s/it]Epoch 0, training loss 0.460:  25%|██▌       | 205/815 [07:50<23:20,  2.30s/it]Epoch 0, training loss 0.460:  25%|██▌       | 206/815 [07:52<23:04,  2.27s/it]Epoch 0, training loss 0.459:  25%|██▌       | 206/815 [07:52<23:04,  2.27s/it]Epoch 0, training loss 0.459:  25%|██▌       | 207/815 [07:54<23:14,  2.29s/it]Epoch 0, training loss 0.459:  25%|██▌       | 207/815 [07:55<23:14,  2.29s/it]Epoch 0, training loss 0.459:  26%|██▌       | 208/815 [07:56<23:02,  2.28s/it]Epoch 0, training loss 0.459:  26%|██▌       | 208/815 [07:57<23:02,  2.28s/it]Epoch 0, training loss 0.459:  26%|██▌       | 209/815 [07:59<23:16,  2.30s/it]Epoch 0, training loss 0.458:  26%|██▌       | 209/815 [07:59<23:16,  2.30s/it]Epoch 0, training loss 0.458:  26%|██▌       | 210/815 [08:01<22:57,  2.28s/it]Epoch 0, training loss 0.457:  26%|██▌       | 210/815 [08:02<22:57,  2.28s/it]Epoch 0, training loss 0.457:  26%|██▌       | 211/815 [08:03<23:11,  2.30s/it]Epoch 0, training loss 0.457:  26%|██▌       | 211/815 [08:04<23:11,  2.30s/it]Epoch 0, training loss 0.457:  26%|██▌       | 212/815 [08:05<22:53,  2.28s/it]Epoch 0, training loss 0.457:  26%|██▌       | 212/815 [08:06<22:53,  2.28s/it]Epoch 0, training loss 0.457:  26%|██▌       | 213/815 [08:08<23:12,  2.31s/it]Epoch 0, training loss 0.456:  26%|██▌       | 213/815 [08:09<23:12,  2.31s/it]Epoch 0, training loss 0.456:  26%|██▋       | 214/815 [08:10<22:45,  2.27s/it]Epoch 0, training loss 0.457:  26%|██▋       | 214/815 [08:11<22:45,  2.27s/it]Epoch 0, training loss 0.457:  26%|██▋       | 215/815 [08:12<23:03,  2.31s/it]Epoch 0, training loss 0.456:  26%|██▋       | 215/815 [08:13<23:03,  2.31s/it]Epoch 0, training loss 0.456:  27%|██▋       | 216/815 [08:14<22:43,  2.28s/it]Epoch 0, training loss 0.457:  27%|██▋       | 216/815 [08:15<22:43,  2.28s/it]Epoch 0, training loss 0.457:  27%|██▋       | 217/815 [08:17<23:00,  2.31s/it]Epoch 0, training loss 0.456:  27%|██▋       | 217/815 [08:18<23:00,  2.31s/it]Epoch 0, training loss 0.456:  27%|██▋       | 218/815 [08:19<22:42,  2.28s/it]Epoch 0, training loss 0.456:  27%|██▋       | 218/815 [08:20<22:42,  2.28s/it]Epoch 0, training loss 0.456:  27%|██▋       | 219/815 [08:21<22:53,  2.30s/it]Epoch 0, training loss 0.456:  27%|██▋       | 219/815 [08:22<22:53,  2.30s/it]Epoch 0, training loss 0.456:  27%|██▋       | 220/815 [08:24<22:27,  2.26s/it]Epoch 0, training loss 0.455:  27%|██▋       | 220/815 [08:25<22:27,  2.26s/it]Epoch 0, training loss 0.455:  27%|██▋       | 221/815 [08:26<22:45,  2.30s/it]Epoch 0, training loss 0.455:  27%|██▋       | 221/815 [08:27<22:45,  2.30s/it]Epoch 0, training loss 0.455:  27%|██▋       | 222/815 [08:28<22:32,  2.28s/it]Epoch 0, training loss 0.454:  27%|██▋       | 222/815 [08:29<22:32,  2.28s/it]Epoch 0, training loss 0.454:  27%|██▋       | 223/815 [08:31<22:47,  2.31s/it]Epoch 0, training loss 0.454:  27%|██▋       | 223/815 [08:31<22:47,  2.31s/it]Epoch 0, training loss 0.454:  27%|██▋       | 224/815 [08:33<22:28,  2.28s/it]Epoch 0, training loss 0.453:  27%|██▋       | 224/815 [08:34<22:28,  2.28s/it]Epoch 0, training loss 0.453:  28%|██▊       | 225/815 [08:35<22:49,  2.32s/it]Epoch 0, training loss 0.453:  28%|██▊       | 225/815 [08:36<22:49,  2.32s/it]Epoch 0, training loss 0.453:  28%|██▊       | 226/815 [08:37<22:22,  2.28s/it]Epoch 0, training loss 0.452:  28%|██▊       | 226/815 [08:38<22:22,  2.28s/it]Epoch 0, training loss 0.452:  28%|██▊       | 227/815 [08:40<22:39,  2.31s/it]Epoch 0, training loss 0.452:  28%|██▊       | 227/815 [08:41<22:39,  2.31s/it]Epoch 0, training loss 0.452:  28%|██▊       | 228/815 [08:42<22:22,  2.29s/it]Epoch 0, training loss 0.453:  28%|██▊       | 228/815 [08:43<22:22,  2.29s/it]Epoch 0, training loss 0.453:  28%|██▊       | 229/815 [08:44<22:40,  2.32s/it]Epoch 0, training loss 0.452:  28%|██▊       | 229/815 [08:45<22:40,  2.32s/it]Epoch 0, training loss 0.452:  28%|██▊       | 230/815 [08:47<22:16,  2.28s/it]Epoch 0, training loss 0.452:  28%|██▊       | 230/815 [08:47<22:16,  2.28s/it]Epoch 0, training loss 0.452:  28%|██▊       | 231/815 [08:49<22:22,  2.30s/it]Epoch 0, training loss 0.451:  28%|██▊       | 231/815 [08:50<22:22,  2.30s/it]Epoch 0, training loss 0.451:  28%|██▊       | 232/815 [08:51<22:06,  2.28s/it]Epoch 0, training loss 0.451:  28%|██▊       | 232/815 [08:52<22:06,  2.28s/it]Epoch 0, training loss 0.451:  29%|██▊       | 233/815 [08:54<22:25,  2.31s/it]Epoch 0, training loss 0.451:  29%|██▊       | 233/815 [08:54<22:25,  2.31s/it]Epoch 0, training loss 0.451:  29%|██▊       | 234/815 [08:56<22:01,  2.27s/it]Epoch 0, training loss 0.450:  29%|██▊       | 234/815 [08:57<22:01,  2.27s/it]Epoch 0, training loss 0.450:  29%|██▉       | 235/815 [08:58<22:14,  2.30s/it]Epoch 0, training loss 0.449:  29%|██▉       | 235/815 [08:59<22:14,  2.30s/it]Epoch 0, training loss 0.449:  29%|██▉       | 236/815 [09:00<21:57,  2.27s/it]Epoch 0, training loss 0.449:  29%|██▉       | 236/815 [09:01<21:57,  2.27s/it]Epoch 0, training loss 0.449:  29%|██▉       | 237/815 [09:03<22:05,  2.29s/it]Epoch 0, training loss 0.448:  29%|██▉       | 237/815 [09:04<22:05,  2.29s/it]Epoch 0, training loss 0.448:  29%|██▉       | 238/815 [09:05<21:54,  2.28s/it]Epoch 0, training loss 0.447:  29%|██▉       | 238/815 [09:06<21:54,  2.28s/it]Epoch 0, training loss 0.447:  29%|██▉       | 239/815 [09:07<22:09,  2.31s/it]Epoch 0, training loss 0.447:  29%|██▉       | 239/815 [09:08<22:09,  2.31s/it]Epoch 0, training loss 0.447:  29%|██▉       | 240/815 [09:10<21:48,  2.28s/it]Epoch 0, training loss 0.446:  29%|██▉       | 240/815 [09:10<21:48,  2.28s/it]Epoch 0, training loss 0.446:  30%|██▉       | 241/815 [09:12<22:06,  2.31s/it]Epoch 0, training loss 0.445:  30%|██▉       | 241/815 [09:13<22:06,  2.31s/it]Epoch 0, training loss 0.445:  30%|██▉       | 242/815 [09:14<21:48,  2.28s/it]Epoch 0, training loss 0.445:  30%|██▉       | 242/815 [09:15<21:48,  2.28s/it]Epoch 0, training loss 0.445:  30%|██▉       | 243/815 [09:17<22:05,  2.32s/it]Epoch 0, training loss 0.444:  30%|██▉       | 243/815 [09:17<22:05,  2.32s/it]Epoch 0, training loss 0.444:  30%|██▉       | 244/815 [09:19<21:44,  2.28s/it]Epoch 0, training loss 0.445:  30%|██▉       | 244/815 [09:20<21:44,  2.28s/it]Epoch 0, training loss 0.445:  30%|███       | 245/815 [09:21<21:58,  2.31s/it]Epoch 0, training loss 0.445:  30%|███       | 245/815 [09:22<21:58,  2.31s/it]Epoch 0, training loss 0.445:  30%|███       | 246/815 [09:23<21:42,  2.29s/it]Epoch 0, training loss 0.444:  30%|███       | 246/815 [09:24<21:42,  2.29s/it]Epoch 0, training loss 0.444:  30%|███       | 247/815 [09:26<21:57,  2.32s/it]Epoch 0, training loss 0.444:  30%|███       | 247/815 [09:27<21:57,  2.32s/it]Epoch 0, training loss 0.444:  30%|███       | 248/815 [09:28<21:28,  2.27s/it]Epoch 0, training loss 0.444:  30%|███       | 248/815 [09:29<21:28,  2.27s/it]Epoch 0, training loss 0.444:  31%|███       | 249/815 [09:30<21:46,  2.31s/it]Epoch 0, training loss 0.444:  31%|███       | 249/815 [09:31<21:46,  2.31s/it]Epoch 0, training loss 0.444:  31%|███       | 250/815 [09:32<21:27,  2.28s/it]Epoch 0, training loss 0.443:  31%|███       | 250/815 [09:33<21:27,  2.28s/it]Epoch 0, training loss 0.443:  31%|███       | 251/815 [09:35<21:38,  2.30s/it]Epoch 0, training loss 0.443:  31%|███       | 251/815 [09:36<21:38,  2.30s/it]Epoch 0, training loss 0.443:  31%|███       | 252/815 [09:37<21:21,  2.28s/it]Epoch 0, training loss 0.444:  31%|███       | 252/815 [09:38<21:21,  2.28s/it]Epoch 0, training loss 0.444:  31%|███       | 253/815 [09:39<21:34,  2.30s/it]Epoch 0, training loss 0.443:  31%|███       | 253/815 [09:40<21:34,  2.30s/it]Epoch 0, training loss 0.443:  31%|███       | 254/815 [09:42<21:14,  2.27s/it]Epoch 0, training loss 0.443:  31%|███       | 254/815 [09:43<21:14,  2.27s/it]Epoch 0, training loss 0.443:  31%|███▏      | 255/815 [09:44<21:34,  2.31s/it]Epoch 0, training loss 0.442:  31%|███▏      | 255/815 [09:45<21:34,  2.31s/it]Epoch 0, training loss 0.442:  31%|███▏      | 256/815 [09:46<21:15,  2.28s/it]Epoch 0, training loss 0.442:  31%|███▏      | 256/815 [09:47<21:15,  2.28s/it]Epoch 0, training loss 0.442:  32%|███▏      | 257/815 [09:49<21:26,  2.30s/it]Epoch 0, training loss 0.441:  32%|███▏      | 257/815 [09:49<21:26,  2.30s/it]Epoch 0, training loss 0.441:  32%|███▏      | 258/815 [09:51<21:02,  2.27s/it]Epoch 0, training loss 0.441:  32%|███▏      | 258/815 [09:52<21:02,  2.27s/it]Epoch 0, training loss 0.441:  32%|███▏      | 259/815 [09:53<21:13,  2.29s/it]Epoch 0, training loss 0.440:  32%|███▏      | 259/815 [09:54<21:13,  2.29s/it]Epoch 0, training loss 0.440:  32%|███▏      | 260/815 [09:55<20:57,  2.27s/it]Epoch 0, training loss 0.440:  32%|███▏      | 260/815 [09:56<20:57,  2.27s/it]Epoch 0, training loss 0.440:  32%|███▏      | 261/815 [09:58<21:10,  2.29s/it]Epoch 0, training loss 0.441:  32%|███▏      | 261/815 [09:58<21:10,  2.29s/it]Epoch 0, training loss 0.441:  32%|███▏      | 262/815 [10:00<20:55,  2.27s/it]Epoch 0, training loss 0.440:  32%|███▏      | 262/815 [10:01<20:55,  2.27s/it]Epoch 0, training loss 0.440:  32%|███▏      | 263/815 [10:02<21:13,  2.31s/it]Epoch 0, training loss 0.439:  32%|███▏      | 263/815 [10:03<21:13,  2.31s/it]Epoch 0, training loss 0.439:  32%|███▏      | 264/815 [10:05<20:54,  2.28s/it]Epoch 0, training loss 0.438:  32%|███▏      | 264/815 [10:05<20:54,  2.28s/it]Epoch 0, training loss 0.438:  33%|███▎      | 265/815 [10:07<21:11,  2.31s/it]Epoch 0, training loss 0.438:  33%|███▎      | 265/815 [10:08<21:11,  2.31s/it]Epoch 0, training loss 0.438:  33%|███▎      | 266/815 [10:09<20:47,  2.27s/it]Epoch 0, training loss 0.437:  33%|███▎      | 266/815 [10:10<20:47,  2.27s/it]Epoch 0, training loss 0.437:  33%|███▎      | 267/815 [10:11<21:01,  2.30s/it]Epoch 0, training loss 0.437:  33%|███▎      | 267/815 [10:12<21:01,  2.30s/it]Epoch 0, training loss 0.437:  33%|███▎      | 268/815 [10:14<20:43,  2.27s/it]Epoch 0, training loss 0.436:  33%|███▎      | 268/815 [10:15<20:43,  2.27s/it]Epoch 0, training loss 0.436:  33%|███▎      | 269/815 [10:16<20:53,  2.30s/it]Epoch 0, training loss 0.436:  33%|███▎      | 269/815 [10:17<20:53,  2.30s/it]Epoch 0, training loss 0.436:  33%|███▎      | 270/815 [10:18<20:38,  2.27s/it]Epoch 0, training loss 0.436:  33%|███▎      | 270/815 [10:19<20:38,  2.27s/it]Epoch 0, training loss 0.436:  33%|███▎      | 271/815 [10:21<20:53,  2.30s/it]Epoch 0, training loss 0.435:  33%|███▎      | 271/815 [10:21<20:53,  2.30s/it]Epoch 0, training loss 0.435:  33%|███▎      | 272/815 [10:23<20:35,  2.28s/it]Epoch 0, training loss 0.434:  33%|███▎      | 272/815 [10:24<20:35,  2.28s/it]Epoch 0, training loss 0.434:  33%|███▎      | 273/815 [10:25<20:47,  2.30s/it]Epoch 0, training loss 0.434:  33%|███▎      | 273/815 [10:26<20:47,  2.30s/it]Epoch 0, training loss 0.434:  34%|███▎      | 274/815 [10:27<20:29,  2.27s/it]Epoch 0, training loss 0.433:  34%|███▎      | 274/815 [10:28<20:29,  2.27s/it]Epoch 0, training loss 0.433:  34%|███▎      | 275/815 [10:30<20:41,  2.30s/it]Epoch 0, training loss 0.433:  34%|███▎      | 275/815 [10:31<20:41,  2.30s/it]Epoch 0, training loss 0.433:  34%|███▍      | 276/815 [10:32<20:24,  2.27s/it]Epoch 0, training loss 0.433:  34%|███▍      | 276/815 [10:33<20:24,  2.27s/it]Epoch 0, training loss 0.433:  34%|███▍      | 277/815 [10:34<20:45,  2.31s/it]Epoch 0, training loss 0.432:  34%|███▍      | 277/815 [10:35<20:45,  2.31s/it]Epoch 0, training loss 0.432:  34%|███▍      | 278/815 [10:37<20:22,  2.28s/it]Epoch 0, training loss 0.432:  34%|███▍      | 278/815 [10:37<20:22,  2.28s/it]Epoch 0, training loss 0.432:  34%|███▍      | 279/815 [10:39<20:28,  2.29s/it]Epoch 0, training loss 0.431:  34%|███▍      | 279/815 [10:40<20:28,  2.29s/it]Epoch 0, training loss 0.431:  34%|███▍      | 280/815 [10:41<20:09,  2.26s/it]Epoch 0, training loss 0.431:  34%|███▍      | 280/815 [10:42<20:09,  2.26s/it]Epoch 0, training loss 0.431:  34%|███▍      | 281/815 [10:43<20:23,  2.29s/it]Epoch 0, training loss 0.430:  34%|███▍      | 281/815 [10:44<20:23,  2.29s/it]Epoch 0, training loss 0.430:  35%|███▍      | 282/815 [10:46<20:06,  2.26s/it]Epoch 0, training loss 0.430:  35%|███▍      | 282/815 [10:46<20:06,  2.26s/it]Epoch 0, training loss 0.430:  35%|███▍      | 283/815 [10:48<20:10,  2.27s/it]Epoch 0, training loss 0.429:  35%|███▍      | 283/815 [10:49<20:10,  2.27s/it]Epoch 0, training loss 0.429:  35%|███▍      | 284/815 [10:50<19:59,  2.26s/it]Epoch 0, training loss 0.429:  35%|███▍      | 284/815 [10:51<19:59,  2.26s/it]Epoch 0, training loss 0.429:  35%|███▍      | 285/815 [10:53<20:14,  2.29s/it]Epoch 0, training loss 0.429:  35%|███▍      | 285/815 [10:53<20:14,  2.29s/it]Epoch 0, training loss 0.429:  35%|███▌      | 286/815 [10:55<20:00,  2.27s/it]Epoch 0, training loss 0.429:  35%|███▌      | 286/815 [10:56<20:00,  2.27s/it]Epoch 0, training loss 0.429:  35%|███▌      | 287/815 [10:57<20:07,  2.29s/it]Epoch 0, training loss 0.428:  35%|███▌      | 287/815 [10:58<20:07,  2.29s/it]Epoch 0, training loss 0.428:  35%|███▌      | 288/815 [10:59<19:46,  2.25s/it]Epoch 0, training loss 0.428:  35%|███▌      | 288/815 [11:00<19:46,  2.25s/it]Epoch 0, training loss 0.428:  35%|███▌      | 289/815 [11:02<20:00,  2.28s/it]Epoch 0, training loss 0.428:  35%|███▌      | 289/815 [11:02<20:00,  2.28s/it]Epoch 0, training loss 0.428:  36%|███▌      | 290/815 [11:04<19:46,  2.26s/it]Epoch 0, training loss 0.427:  36%|███▌      | 290/815 [11:05<19:46,  2.26s/it]Epoch 0, training loss 0.427:  36%|███▌      | 291/815 [11:06<19:51,  2.27s/it]Epoch 0, training loss 0.427:  36%|███▌      | 291/815 [11:07<19:51,  2.27s/it]Epoch 0, training loss 0.427:  36%|███▌      | 292/815 [11:08<19:30,  2.24s/it]Epoch 0, training loss 0.427:  36%|███▌      | 292/815 [11:09<19:30,  2.24s/it]Epoch 0, training loss 0.427:  36%|███▌      | 293/815 [11:11<19:51,  2.28s/it]Epoch 0, training loss 0.426:  36%|███▌      | 293/815 [11:11<19:51,  2.28s/it]Epoch 0, training loss 0.426:  36%|███▌      | 294/815 [11:13<19:39,  2.26s/it]Epoch 0, training loss 0.426:  36%|███▌      | 294/815 [11:14<19:39,  2.26s/it]Epoch 0, training loss 0.426:  36%|███▌      | 295/815 [11:15<19:53,  2.29s/it]Epoch 0, training loss 0.425:  36%|███▌      | 295/815 [11:16<19:53,  2.29s/it]Epoch 0, training loss 0.425:  36%|███▋      | 296/815 [11:17<19:41,  2.28s/it]Epoch 0, training loss 0.425:  36%|███▋      | 296/815 [11:18<19:41,  2.28s/it]Epoch 0, training loss 0.425:  36%|███▋      | 297/815 [11:20<19:52,  2.30s/it]Epoch 0, training loss 0.425:  36%|███▋      | 297/815 [11:21<19:52,  2.30s/it]Epoch 0, training loss 0.425:  37%|███▋      | 298/815 [11:22<19:32,  2.27s/it]Epoch 0, training loss 0.424:  37%|███▋      | 298/815 [11:23<19:32,  2.27s/it]Epoch 0, training loss 0.424:  37%|███▋      | 299/815 [11:24<19:47,  2.30s/it]Epoch 0, training loss 0.424:  37%|███▋      | 299/815 [11:25<19:47,  2.30s/it]Epoch 0, training loss 0.424:  37%|███▋      | 300/815 [11:27<19:27,  2.27s/it]Epoch 0, training loss 0.424:  37%|███▋      | 300/815 [11:27<19:27,  2.27s/it]Epoch 0, training loss 0.424:  37%|███▋      | 301/815 [11:29<19:39,  2.30s/it]Epoch 0, training loss 0.423:  37%|███▋      | 301/815 [11:30<19:39,  2.30s/it]Epoch 0, training loss 0.423:  37%|███▋      | 302/815 [11:31<19:28,  2.28s/it]Epoch 0, training loss 0.423:  37%|███▋      | 302/815 [11:32<19:28,  2.28s/it]Epoch 0, training loss 0.423:  37%|███▋      | 303/815 [11:34<19:36,  2.30s/it]Epoch 0, training loss 0.423:  37%|███▋      | 303/815 [11:34<19:36,  2.30s/it]Epoch 0, training loss 0.423:  37%|███▋      | 304/815 [11:36<19:17,  2.27s/it]Epoch 0, training loss 0.423:  37%|███▋      | 304/815 [11:37<19:17,  2.27s/it]Epoch 0, training loss 0.423:  37%|███▋      | 305/815 [11:38<19:32,  2.30s/it]Epoch 0, training loss 0.422:  37%|███▋      | 305/815 [11:39<19:32,  2.30s/it]Epoch 0, training loss 0.422:  38%|███▊      | 306/815 [11:40<19:16,  2.27s/it]Epoch 0, training loss 0.422:  38%|███▊      | 306/815 [11:41<19:16,  2.27s/it]Epoch 0, training loss 0.422:  38%|███▊      | 307/815 [11:43<19:29,  2.30s/it]Epoch 0, training loss 0.422:  38%|███▊      | 307/815 [11:43<19:29,  2.30s/it]Epoch 0, training loss 0.422:  38%|███▊      | 308/815 [11:45<19:10,  2.27s/it]Epoch 0, training loss 0.422:  38%|███▊      | 308/815 [11:46<19:10,  2.27s/it]Epoch 0, training loss 0.422:  38%|███▊      | 309/815 [11:47<19:22,  2.30s/it]Epoch 0, training loss 0.422:  38%|███▊      | 309/815 [11:48<19:22,  2.30s/it]Epoch 0, training loss 0.422:  38%|███▊      | 310/815 [11:49<19:04,  2.27s/it]Epoch 0, training loss 0.422:  38%|███▊      | 310/815 [11:50<19:04,  2.27s/it]Epoch 0, training loss 0.422:  38%|███▊      | 311/815 [11:52<19:18,  2.30s/it]Epoch 0, training loss 0.421:  38%|███▊      | 311/815 [11:53<19:18,  2.30s/it]Epoch 0, training loss 0.421:  38%|███▊      | 312/815 [11:54<19:03,  2.27s/it]Epoch 0, training loss 0.421:  38%|███▊      | 312/815 [11:55<19:03,  2.27s/it]Epoch 0, training loss 0.421:  38%|███▊      | 313/815 [11:56<19:09,  2.29s/it]Epoch 0, training loss 0.420:  38%|███▊      | 313/815 [11:57<19:09,  2.29s/it]Epoch 0, training loss 0.420:  39%|███▊      | 314/815 [11:59<18:56,  2.27s/it]Epoch 0, training loss 0.420:  39%|███▊      | 314/815 [11:59<18:56,  2.27s/it]Epoch 0, training loss 0.420:  39%|███▊      | 315/815 [12:01<19:10,  2.30s/it]Epoch 0, training loss 0.420:  39%|███▊      | 315/815 [12:02<19:10,  2.30s/it]Epoch 0, training loss 0.420:  39%|███▉      | 316/815 [12:03<18:51,  2.27s/it]Epoch 0, training loss 0.420:  39%|███▉      | 316/815 [12:04<18:51,  2.27s/it]Epoch 0, training loss 0.420:  39%|███▉      | 317/815 [12:05<19:03,  2.30s/it]Epoch 0, training loss 0.419:  39%|███▉      | 317/815 [12:06<19:03,  2.30s/it]Epoch 0, training loss 0.419:  39%|███▉      | 318/815 [12:08<18:47,  2.27s/it]Epoch 0, training loss 0.419:  39%|███▉      | 318/815 [12:09<18:47,  2.27s/it]Epoch 0, training loss 0.419:  39%|███▉      | 319/815 [12:10<19:00,  2.30s/it]Epoch 0, training loss 0.418:  39%|███▉      | 319/815 [12:11<19:00,  2.30s/it]Epoch 0, training loss 0.418:  39%|███▉      | 320/815 [12:12<18:45,  2.27s/it]Epoch 0, training loss 0.418:  39%|███▉      | 320/815 [12:13<18:45,  2.27s/it]Epoch 0, training loss 0.418:  39%|███▉      | 321/815 [12:15<18:59,  2.31s/it]Epoch 0, training loss 0.418:  39%|███▉      | 321/815 [12:15<18:59,  2.31s/it]Epoch 0, training loss 0.418:  40%|███▉      | 322/815 [12:17<18:43,  2.28s/it]Epoch 0, training loss 0.418:  40%|███▉      | 322/815 [12:18<18:43,  2.28s/it]Epoch 0, training loss 0.418:  40%|███▉      | 323/815 [12:19<18:53,  2.30s/it]Epoch 0, training loss 0.417:  40%|███▉      | 323/815 [12:20<18:53,  2.30s/it]Epoch 0, training loss 0.417:  40%|███▉      | 324/815 [12:21<18:35,  2.27s/it]Epoch 0, training loss 0.417:  40%|███▉      | 324/815 [12:22<18:35,  2.27s/it]Epoch 0, training loss 0.417:  40%|███▉      | 325/815 [12:24<18:46,  2.30s/it]Epoch 0, training loss 0.417:  40%|███▉      | 325/815 [12:25<18:46,  2.30s/it]Epoch 0, training loss 0.417:  40%|████      | 326/815 [12:28<22:11,  2.72s/it]Epoch 0, training loss 0.416:  40%|████      | 326/815 [12:28<22:11,  2.72s/it]Epoch 0, training loss 0.416:  40%|████      | 327/815 [12:30<21:14,  2.61s/it]Epoch 0, training loss 0.416:  40%|████      | 327/815 [12:31<21:14,  2.61s/it]Epoch 0, training loss 0.416:  40%|████      | 328/815 [12:32<20:07,  2.48s/it]Epoch 0, training loss 0.415:  40%|████      | 328/815 [12:33<20:07,  2.48s/it]
